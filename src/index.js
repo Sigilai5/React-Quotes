@@ -10,14 +10,14 @@ class App extends Component {
         return(
             <React.Fragment>
                 <h1>Quotes</h1>
-            <Quotes />
+            <Quote />
             </React.Fragment>
         )
     }
 };
 
 
-class Quotes extends Component{
+class Quote extends Component{
 
     render() {
         return (
