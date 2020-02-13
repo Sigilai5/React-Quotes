@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import * as serviceWorker from './serviceWorker';
+import {MDBBtn,MDBContainer,MDBRow,MDBCol} from "mdbreact";
 import {render} from "@testing-library/react";
 
 
@@ -9,8 +13,23 @@ class App extends Component {
     render(){
         return(
             <React.Fragment>
-                <h1>Quotes</h1>
-            <Quote />
+
+                <MDBContainer>
+
+                    <MDBRow>
+
+                        <MDBCol md="6">
+                            left
+                        </MDBCol>
+
+                        <MDBCol md="6">
+                            right
+                        </MDBCol>
+
+                    </MDBRow>
+
+                </MDBContainer>
+
             </React.Fragment>
         )
     }
