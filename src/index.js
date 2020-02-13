@@ -42,6 +42,8 @@ class App extends Component {
          your_name:this.state.your_name,
          quote:this.state.quote,
          author:this.state.author,
+         upvotes:0,
+         downvotes:0
       });
       this.setState({quotes: newArray});
       this.setState({
