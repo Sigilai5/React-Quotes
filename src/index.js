@@ -19,7 +19,7 @@ class App extends Component {
         this.state = {
             modal:false,
             quotes:[
-                {id:1,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",up:0,down:0},
+                {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",up:0,down:0},
                 {id:2,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",up:0,down:0},
             ]
         };
@@ -56,6 +56,12 @@ class App extends Component {
 
     };
 
+    //deletes values
+    handleDelete = eventId => {
+      const quotes = this.state.quotes.filter(e =>e.id != eventId);
+      this.setState({quotes})
+    };
+
     toggleModal = () => {
         this.setState({
            modal: !this.state.modal
@@ -88,11 +94,11 @@ class App extends Component {
                                     author={quote.author}
                                     upvotes={quote.up}
                                     downvotes={quote.down}
-                                    onDelete=""
+                                    onDelete={this.handleDelete}
                                 />
 
 
-                            ))};
+                            ))}
 
 
                         </MDBCol>
@@ -171,14 +177,28 @@ class Quote extends Component{
             <React.Fragment>
                 <h4>{this.props.your_name}</h4>
                 <h6>{this.props.quote}</h6>
-                <i>{this.props.author}</i>
 
+                {this.props.author && (
+                    <React.Fragment>
+                        <i>{this.props.author}</i>
+                    </React.Fragment>
+                )}
+
+                <MDBContainer>
                 <MDBRow>
+                    <MDBCol xs="6" className="text-center">
+                    <MDBBtn color="primary" outline rounded ><MDBIcon color="primary" icon="thumbs-up" />{this.props.upvotes}</MDBBtn>
 
-                    <MDBCol xs="6"><MDBCol xs="6"><MDBIcon color="primary" icon="thumbs-up" /></MDBCol></MDBCol>
-                    <MDBCol xs="6"><MDBIcon color="primary" icon="thumbs-down" /></MDBCol>
+                    <MDBBtn rounded outline color="danger"><MDBIcon color="primary" icon="thumbs-down" />{this.props.downvotes}</MDBBtn>
+
+
+                        <MDBBtn rounded color="danger" onClick={() => this.props.onDelete(this.props.id)}>Delete</MDBBtn>
+
+                    </MDBCol>
+
+
                 </MDBRow>
-
+                </MDBContainer>
 
 
             </React.Fragment>
