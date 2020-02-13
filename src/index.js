@@ -9,18 +9,14 @@ import {MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter
 import {render} from "@testing-library/react";
 
 
-
-
-
-
 class App extends Component {
     constructor(props){
         super(props);
         this.state = {
             modal:false,
             quotes:[
-                {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",up:0,down:0},
-                {id:2,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",up:0,down:0},
+                {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",upvotes:0,down:0},
+                {id:2,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",upvotes:0,down:0},
             ]
         };
     }
@@ -62,6 +58,12 @@ class App extends Component {
       this.setState({quotes})
     };
 
+    upVote = eventId => {
+
+        console.log(eventId);
+    }
+
+
     toggleModal = () => {
         this.setState({
            modal: !this.state.modal
@@ -92,9 +94,10 @@ class App extends Component {
                                     your_name={quote.your_name}
                                     quote={quote.quote}
                                     author={quote.author}
-                                    upvotes={quote.up}
-                                    downvotes={quote.down}
+                                    upvotes={quote.upvotes}
+                                    downvotes={quote.downvotes}
                                     onDelete={this.handleDelete}
+                                    upVote={this.upVote}
                                 />
 
 
@@ -172,11 +175,18 @@ class App extends Component {
 
 class Quote extends Component{
 
+    state = {
+        bgColor: "",
+        upvotes:this.props.upvotes,
+
+    };
+
+
     render() {
         return (
             <React.Fragment>
                 <h4>{this.props.your_name}</h4>
-                <h6>{this.props.quote}</h6>
+                <h6 style={{backgroundColor:this.state.bgColor}}>{this.props.quote}</h6>
 
                 {this.props.author && (
                     <React.Fragment>
@@ -187,7 +197,14 @@ class Quote extends Component{
                 <MDBContainer>
                 <MDBRow>
                     <MDBCol xs="6" className="text-center">
-                    <MDBBtn color="primary" outline rounded ><MDBIcon color="primary" icon="thumbs-up" />{this.props.upvotes}</MDBBtn>
+                        ID:{this.props.id}
+                    <MDBBtn
+                        onClick={() => {
+                            this.setState({ bgColor: "yellow" });
+                            this.setState({ upvotes: this.state.upvotes + 1 });
+                            console.log(this.state.bgColor);
+                        }}
+                        color="primary" outline rounded ><MDBIcon color="primary" icon="thumbs-up" />{this.state.upvotes}</MDBBtn>
 
                     <MDBBtn rounded outline color="danger"><MDBIcon color="primary" icon="thumbs-down" />{this.props.downvotes}</MDBBtn>
 
