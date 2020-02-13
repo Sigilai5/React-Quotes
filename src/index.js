@@ -15,8 +15,8 @@ class App extends Component {
         this.state = {
             modal:false,
             quotes:[
-                {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",upvotes:0,down:0},
-                {id:2,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",upvotes:0,down:0},
+                {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",upvotes:0,downvotes:0},
+                {id:2,your_name: "Alex James", quote: "Give all you got!", author:"Jayme",upvotes:0,downvotes:0},
             ]
         };
     }
@@ -57,11 +57,6 @@ class App extends Component {
       const quotes = this.state.quotes.filter(e =>e.id != eventId);
       this.setState({quotes})
     };
-
-    upVote = eventId => {
-
-        console.log(eventId);
-    }
 
 
     toggleModal = () => {
@@ -178,6 +173,7 @@ class Quote extends Component{
     state = {
         bgColor: "",
         upvotes:this.props.upvotes,
+        downvotes:this.props.downvotes
 
     };
 
@@ -202,11 +198,15 @@ class Quote extends Component{
                         onClick={() => {
                             this.setState({ bgColor: "yellow" });
                             this.setState({ upvotes: this.state.upvotes + 1 });
-                            console.log(this.state.bgColor);
                         }}
                         color="primary" outline rounded ><MDBIcon color="primary" icon="thumbs-up" />{this.state.upvotes}</MDBBtn>
 
-                    <MDBBtn rounded outline color="danger"><MDBIcon color="primary" icon="thumbs-down" />{this.props.downvotes}</MDBBtn>
+                    <MDBBtn
+                        onClick={() => {
+                            this.setState({ downvotes: this.state.downvotes + 1 });
+
+                        }}
+                        rounded outline color="danger"><MDBIcon color="primary" icon="thumbs-down" />{this.state.downvotes}</MDBBtn>
 
 
                         <MDBBtn rounded color="danger" onClick={() => this.props.onDelete(this.props.id)}>Delete</MDBBtn>
