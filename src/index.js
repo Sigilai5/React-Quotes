@@ -25,6 +25,37 @@ class App extends Component {
         };
     }
 
+
+
+    //Handles input ands sets value to the current state
+
+    handleInputChange = inputName => value => {
+        const nextValue = value;
+        this.setState({
+           [inputName]: nextValue
+        });
+        console.log(this.state)
+    };
+
+
+    //adds item to state
+    addEvent = () => {
+      var newArray = [...this.state.quotes];
+      newArray.push({
+         id:newArray.length ? newArray[newArray.length - 1].id + 1 :1,
+         your_name:this.state.your_name,
+         quote:this.state.quote,
+         author:this.state.author,
+      });
+      this.setState({quotes: newArray});
+      this.setState({
+          your_name:"",
+          quote:"",
+          author:"",
+      });
+
+    };
+
     toggleModal = () => {
         this.setState({
            modal: !this.state.modal
@@ -81,45 +112,45 @@ class App extends Component {
                     <MDBModalBody>
                         <form className="mx-3 grey-text">
                             <MDBInput
-                                name="time"
-                                label="Time"
-                                icon="clock"
-                                hint="12:30"
+                                name="your_name"
+                                label="Your Name"
+                                icon="user"
+                                hint="John Doe"
                                 group type="text"
+                                getValue={this.handleInputChange("your_name")}
 
                             />
 
                             <MDBInput
-                                name="title"
-                                label="Title"
+                                name="quote"
+                                label="Quote"
                                 icon="edit"
-                                hint="Briefing"
+                                hint="Give me Liberty!"
                                 group type="text"
-
+                                getValue={this.handleInputChange("quote")}
                             />
 
                             <MDBInput
-                                name="location"
-                                label="Location (optional)"
-                                icon="map"
+                                name="author"
+                                label="Author (optional)"
+                                icon="user-tie"
                                 group
                                 type="text"
+                                getValue={this.handleInputChange("author")}
 
                             />
 
-                            <MDBInput
-                                name="description"
-                                label="Description (optional)"
-                                icon="sticky-note"
-                                group
-                                type="textarea"
-
-                            />
 
                         </form>
                     </MDBModalBody>
                     <MDBModalFooter className="justify-content-center">
-                        <MDBBtn >
+                        <MDBBtn
+                            color="info"
+                            onClick={() => {
+                                this.toggleModal();
+                                this.addEvent();
+                            }}
+                        >
                             Add
                         </MDBBtn>
 
