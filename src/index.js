@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import * as serviceWorker from './serviceWorker';
-import {MDBBtn,MDBContainer,MDBRow,MDBCol} from "mdbreact";
+import {MDBBtn,MDBContainer,MDBRow,MDBCol,MDBIcon} from "mdbreact";
 import {render} from "@testing-library/react";
 
 
@@ -18,11 +18,13 @@ class App extends Component {
 
                     <MDBRow>
 
-                        <MDBCol md="6">
-                            left
+                        <MDBCol md="3">
+                            <MDBBtn color="primary">
+                                <MDBIcon icon="magic" className="mr-1" /> Add Quote
+                            </MDBBtn>
                         </MDBCol>
 
-                        <MDBCol md="6">
+                        <MDBCol md="9">
                             right
                         </MDBCol>
 
