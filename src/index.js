@@ -16,7 +16,7 @@ class App extends Component {
             modal:false,
             quotes:[
                 {id:1,your_name: "Brian Sigilai", quote: "Always the stairs,never the escalator!", author:"Casey Neistat",upvotes:0,downvotes:0},
-                {id:2,your_name: "John", quote: "Am a programming lab rat", author:"Jane Doe",upvotes:0,downvotes:0},
+                {id:2,your_name: "Doe John", quote: "Am a programming lab rat", author:"Jane Doe",upvotes:0,downvotes:0},
             ]
         };
     }
